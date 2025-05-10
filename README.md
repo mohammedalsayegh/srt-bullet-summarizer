@@ -1,4 +1,3 @@
-````markdown
 # srt-bullet-summarizer
 
 A fast and flexible CLI tool to summarize `.srt` (subtitle) and `.txt` files into clean, bullet-point summaries using a local LLM via an OpenAI-compatible endpoint (e.g., LLaMA 3.2 with [Ollama](https://ollama.com/)).
@@ -41,7 +40,7 @@ A fast and flexible CLI tool to summarize `.srt` (subtitle) and `.txt` files int
 
 ```sh
 cargo build --release
-````
+
 
 ### 🏃 Run manually
 
