@@ -1,6 +1,9 @@
+````markdown
 # srt-bullet-summarizer
 
 A fast and flexible CLI tool to summarize `.srt` (subtitle) and `.txt` files into clean, bullet-point summaries using a local LLM via an OpenAI-compatible endpoint (e.g., LLaMA 3.2 with [Ollama](https://ollama.com/)).
+
+---
 
 ## ✨ Features
 
@@ -10,6 +13,9 @@ A fast and flexible CLI tool to summarize `.srt` (subtitle) and `.txt` files int
 - ✅ Generates clear, concise bullet points
 - ✅ Automatically creates output filename if not specified
 - ✅ Unicode-safe file handling
+- ✅ **Live `.srt` monitoring script with GUI feedback** (optional)
+
+---
 
 ## 🧠 How It Works
 
@@ -19,20 +25,25 @@ A fast and flexible CLI tool to summarize `.srt` (subtitle) and `.txt` files int
 4. All chunk summaries are combined using a **Reduce** prompt.
 5. The final bullet-point summary is saved to a `.txt` file.
 
+---
+
 ## 🔧 Requirements
 
 - Rust (1.70+ recommended)
 - Running local LLM API (e.g., `ollama serve`)
+- Optional: `yad` (for GUI monitoring)
+
+---
 
 ## 🚀 Usage
 
-### Build
+### 🔨 Build the CLI tool
 
 ```sh
 cargo build --release
 ````
 
-### Run
+### 🏃 Run manually
 
 ```sh
 # Summarize an SRT file
@@ -47,22 +58,28 @@ cargo build --release
 
 > 💡 If no output path is provided, a file named like `input_summary.txt` will be created next to the input.
 
-## 🧪 Example
+---
+
+## 👀 Automatic SRT Monitor (Optional)
+
+The `srt_monitor.sh` script watches your `~/Downloads` folder for new `.srt` files, processes them using the summarizer, and moves both the `.srt` and `_summary.txt` files into a `~/Downloads/srt/` folder. It also displays live feedback using a GUI window (requires `yad`).
+
+### 🧪 Example
 
 ```sh
-./srt-bullet-summarizer assets/sample.srt
+./srt_monitor.sh
 ```
 
-Outputs:
+> This launches a live monitor window that updates whenever a new `.srt` file is added.
 
-```
-assets/sample_summary.txt
-```
+---
 
 ## 📂 File Output Convention
 
 * Input: `lecture.srt` → Output: `lecture_summary.txt`
 * Input: `meeting_notes.txt` → Output: `meeting_notes_summary.txt`
+
+---
 
 ## 🔌 Configuration
 
@@ -75,9 +92,12 @@ let config = OpenAIConfig::default()
 
 Update it if you're using a different LLM server.
 
+---
+
 ## 📦 Dependencies
 
 * `langchain_rust`
 * `serde_json`
 * `regex`
 * `tokio`
+* `yad` (for the monitoring script GUI, optional)
